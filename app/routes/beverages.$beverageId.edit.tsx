@@ -3,7 +3,7 @@ import {
   LoaderFunctionArgs,
   json,
   redirect,
-} from "@remix-run/node";
+} from "@vercel/remix";
 import { Form, useActionData, useLoaderData } from "@remix-run/react";
 import { z } from "zod";
 import { db } from "~/lib/db.server";

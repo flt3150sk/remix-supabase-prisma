@@ -1,4 +1,4 @@
-import { ActionFunctionArgs, json, redirect } from "@remix-run/node";
+import { ActionFunctionArgs, json, redirect } from "@vercel/remix";
 import { Form, useActionData } from "@remix-run/react";
 import { z } from "zod";
 import { db } from "~/lib/db.server";
