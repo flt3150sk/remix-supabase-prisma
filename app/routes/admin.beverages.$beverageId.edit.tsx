@@ -9,6 +9,7 @@ import { z } from "zod";
 import { db } from "~/lib/db.server";
 import { useForm, getFormProps, getInputProps } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
+import { path } from "~/lib/path";
 
 export async function loader({ params }: LoaderFunctionArgs) {
   const beverageId = params.beverageId;
@@ -39,7 +40,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
   const intent = formData.get("intent");
   if (intent === "DELETE") {
     await db.beverage.delete({ where: { id: beverageId } });
-    return redirect("/beverages");
+    return redirect(path.admin.beverageIndex);
   }
 
   const submission = parseWithZod(formData, { schema });
@@ -52,7 +53,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
     where: { id: beverageId },
     data: submission.value,
   });
-  return redirect("/beverages");
+  return redirect(path.admin.beverageIndex);
 }
 
 export default function Route() {
@@ -69,7 +70,7 @@ export default function Route() {
   });
 
   return (
-    <div className="container mx-auto">
+    <>
       <h2 className="text-2xl">Edit Beverage</h2>
       <Form method="PUT" {...getFormProps(form)}>
         <div>
@@ -92,6 +93,6 @@ export default function Route() {
           </button>
         </div>
       </Form>
-    </div>
+    </>
   );
 }

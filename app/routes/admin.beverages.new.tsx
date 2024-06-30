@@ -4,6 +4,7 @@ import { z } from "zod";
 import { db } from "~/lib/db.server";
 import { useForm, getFormProps, getInputProps } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
+import { path } from "~/lib/path";
 
 const schema = z.object({
   name: z.string(),
@@ -18,7 +19,7 @@ export async function action({ request }: ActionFunctionArgs) {
   }
 
   await db.beverage.create({ data: submission.value });
-  return redirect("/beverages");
+  return redirect(path.admin.beverageIndex);
 }
 
 export default function Route() {

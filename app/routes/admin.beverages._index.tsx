@@ -1,5 +1,6 @@
 import { Link, useLoaderData } from "@remix-run/react";
 import { db } from "~/lib/db.server";
+import { path } from "~/lib/path";
 
 export const loader = async () => {
   const data = {
@@ -13,11 +14,11 @@ export default function Route() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <div className="container mx-auto">
+    <>
       <div className="flex justify-between items-center">
         <h2 className="text-2xl">Beverages</h2>
         <Link
-          to="/beverages/new"
+          to={path.admin.beverageNew}
           className="bg-blue-600 text-white rounded px-4 py-2"
         >
           New Beverage
@@ -27,7 +28,7 @@ export default function Route() {
         {data.items.map((item) => (
           <li key={item.id}>
             <Link
-              to={`/beverages/${item.id}/edit`}
+              to={path.admin.beverageEdit(item.id)}
               className="text-blue-600"
             >
               {item.name}
@@ -35,6 +36,6 @@ export default function Route() {
           </li>
         ))}
       </ul>
-    </div>
+    </>
   );
 }
