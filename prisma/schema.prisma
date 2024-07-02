@@ -12,4 +12,5 @@ model Beverage {
   id        Int      @id @default(autoincrement())
   name      String
   createdAt DateTime @default(now()) @db.Date
+  description String @default("")
 }
