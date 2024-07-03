@@ -27,7 +27,7 @@ export const AdminSidebar = () => {
   const location = useLocation();
 
   return (
-    <aside className="border-r-2">
+    <aside className="border-r-2 relative">
       <nav className="h-full">
         <ul>
           {sidebarItems.map((item) => (
@@ -45,6 +45,11 @@ export const AdminSidebar = () => {
           ))}
         </ul>
       </nav>
+      <form method="POST" action=".">
+        <button className="absolute border border-blue-600 bg-white text-blue-600 rounded px-4 py-2 bottom-4 right-2/4 translate-x-2/4 w-3/4">
+          Signout
+        </button>
+      </form>
     </aside>
   );
 };

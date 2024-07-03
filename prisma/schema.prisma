@@ -8,9 +8,26 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+enum Role {
+  admin
+  user
+}
+
+model Profile {
+  id    String @id @db.Uuid
+  role  Role   @default(user)
+  beverages Beverage[]
+
+  @@map("profiles")
+}
+
 model Beverage {
-  id        Int      @id @default(autoincrement())
+  id        String      @id @default(uuid()) @db.Uuid
   name      String
   createdAt DateTime @default(now()) @db.Date
   description String @default("")
+  user Profile @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId    String @db.Uuid
+
+  @@map("beverages")
 }

@@ -24,7 +24,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
   }
 
   const data = await db.beverage.findUnique({
-    where: { id: Number(params.beverageId) },
+    where: { id: params.beverageId },
   });
 
   if (!data) {
@@ -40,7 +40,7 @@ const schema = z.object({
 });
 
 export async function action({ request, params }: ActionFunctionArgs) {
-  const beverageId = Number(params.beverageId);
+  const beverageId = params.beverageId;
 
   const formData = await request.formData();
   const intent = formData.get("intent");

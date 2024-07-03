@@ -24,7 +24,7 @@ export async function action({ request }: ActionFunctionArgs) {
     return json(submission.reply());
   }
 
-  await db.beverage.create({ data: submission.value });
+  await db.beverage.create({ data: { ...submission.value, userId: "1" } });
   return redirect(path.admin.beverageIndex);
 }
 
